@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+Module factorises
+nums to product
+"""
+from sys import argv
+
 def factorize_v1(num):
     flag = 0
     for i in range(2, int(num / 2) + 1, 1):
