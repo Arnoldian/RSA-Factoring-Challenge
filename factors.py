@@ -1,25 +1,40 @@
 #!/usr/bin/python3
+"""
+Module that factorizes
+nums into product
+"""
+from sys import argv
 
-def factorize_v1(num):
-    flag = 0
-    for i in range(2, int(num / 2) + 1, 1):
-        if num % i == 0:
-            print("{:d}={}*{}".format(num, num // i, i))
-            flag = 1
-            break
-    if flag == 0:
-        print("{:d}={}*{}".format(num, num, 1))
 
-def factorize_v2():
-    with open(input("Enter the file name: ")) as f:
-        for number in f:
-            num = int(number)
-            factorize_v1(num)
+def factorize(value):
+    """"decomposition of int > 1"""
+    i = 2
 
-# To call the first function
-num = 100
-factorize_v1(num)
+    if value < 2:
+        return
+    factors = []
+    while i * i <= value:
+        if value % i:
+            i += 1
+        else:
+            value //= i
+            factors.append(i)
+    if value > 1:
+        factors.append(value)
+    print(f"{value} = {' * '.join(map(str, factors))}")
 
-# To call the second function
-factorize_v2()
+
+if len(argv) != 2:
+    exit()
+
+try:
+    with open(argv[1]) as file:
+        line = file.readline()
+
+        while line != "":
+            value = int(line.split('\n')[0])
+            factorize(value)
+            line = file.readline()
+except:
+    pass
 
